@@ -49,15 +49,18 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _navigateToLogin() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   void _navigateToDoctorHome() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorHomePage()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => DoctorHomePage()));
   }
 
   void _navigateToPatientHome() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => PatientHomePage()));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => PatientHomePage()));
   }
 
   @override
@@ -71,14 +74,14 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-
-              Image.asset('assets/images/login_bg.png', width: MediaQuery.of(context).size.width,),
-
+              Image.asset(
+                'assets/images/login_bg.png',
+                width: MediaQuery.of(context).size.width,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
 }
