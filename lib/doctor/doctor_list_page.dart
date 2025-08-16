@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:practice/doctor/doctor_details_page.dart';
 import 'package:practice/doctor/model/doctor.dart';
 import 'package:practice/doctor/widget/doctor_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DoctorListPage extends StatefulWidget {
   const DoctorListPage({super.key});
@@ -59,7 +60,8 @@ class _DoctorListPageState extends State<DoctorListPage> {
                     height: 30.0,
                   ),
                   Text(
-                    'Find your doctor,\nand book an appointment',
+                    AppLocalizations.of(context)!
+                        .find, // dùng key "find" trong .arb
                     style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -69,7 +71,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                     height: 30,
                   ),
                   Text(
-                    'Find Doctor by Category',
+                    AppLocalizations.of(context)!.findByCategory,
                     style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.normal,
@@ -83,9 +85,9 @@ class _DoctorListPageState extends State<DoctorListPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _buildCategoryCard(
-                          context, 'Cardiologist', 'assets/images/heart.png'),
+                          context, AppLocalizations.of(context)!.cardiologist, 'assets/images/heart.png'),
                       _buildCategoryCard(
-                          context, 'Dentist', 'assets/images/dental.png'),
+                          context, AppLocalizations.of(context)!.dentist, 'assets/images/dental.png'),
                     ],
                   ),
                   SizedBox(
@@ -95,9 +97,9 @@ class _DoctorListPageState extends State<DoctorListPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       _buildCategoryCard(
-                          context, 'Oncologist', 'assets/images/onco.png'),
+                          context, AppLocalizations.of(context)!.ophthalmologist, 'assets/images/onco.png'),
                       _buildCategoryCard(
-                          context, 'See All', 'assets/images/grid.png',
+                          context, AppLocalizations.of(context)!.seeAll, 'assets/images/grid.png',
                           isHighlighed: true),
                     ],
                   ),
@@ -108,7 +110,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Top Doctors',
+                        AppLocalizations.of(context)!.topDoctors,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -116,7 +118,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                         ),
                       ),
                       Text(
-                        'VIEW ALL',
+                        AppLocalizations.of(context)!.viewAll,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -130,7 +132,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                       itemCount: _doctors.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

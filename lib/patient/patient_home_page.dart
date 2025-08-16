@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:practice/doctor/doctor_list_page.dart';
 import 'package:practice/patient/chat_list_page.dart';
 import 'package:practice/profile_page.dart';
+import 'package:practice/setting_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PatientHomePage extends StatefulWidget {
   const PatientHomePage({super.key});
@@ -18,6 +21,7 @@ class _PatientHomePageState extends State<PatientHomePage> {
     DoctorListPage(),
     ChatListPage(),
     ProfilePage(),
+    SettingsPage(),
   ];
 
   void _onItmTapped(int index) {
@@ -30,20 +34,20 @@ class _PatientHomePageState extends State<PatientHomePage> {
     return await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text('Are you sure?'),
-              content: Text('Do you want to exit the app?'),
+              title: Text(AppLocalizations.of(context)!.areYouSure),
+              content: Text(AppLocalizations.of(context)!.exitApp),
               actions: <Widget>[
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).pop(false);
                     },
-                    child: Text('No')),
+                    child: Text(AppLocalizations.of(context)!.no)),
                 TextButton(
                     onPressed: () {
                       Navigator.of(context).pop(true);
                       SystemNavigator.pop();
                     },
-                    child: Text('Yes')),
+                    child: Text(AppLocalizations.of(context)!.yes)),
               ],
             ));
   }
@@ -57,22 +61,27 @@ class _PatientHomePageState extends State<PatientHomePage> {
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color(0xff0064FA),
           unselectedItemColor: Color(0xffBEBEBE),
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.home_filled,
                 ),
-                label: 'Home'),
+                label: AppLocalizations.of(context)!.home,),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.chat,
                 ),
-                label: 'Chat'),
+                label: AppLocalizations.of(context)!.chat),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
                 ),
-                label: 'Profile'),
+                label: AppLocalizations.of(context)!.profile),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.settings,
+                ),
+                label: AppLocalizations.of(context)!.settings),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.white,

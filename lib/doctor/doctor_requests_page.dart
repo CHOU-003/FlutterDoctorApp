@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'model/booking.dart';
+
 
 class DoctorRequestsPage extends StatefulWidget {
   const DoctorRequestsPage({super.key});
@@ -52,12 +53,12 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctor Requests'),
+        title: Text(AppLocalizations.of(context)!.doctorRequests),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _bookings.isEmpty
-              ? Center(child: Text('No booking available'))
+              ? Center(child: Text(AppLocalizations.of(context)!.noBooking,))
               : ListView.builder(
                   itemCount: _bookings.length,
                   itemBuilder: (context, index) {
@@ -75,7 +76,14 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
   }
 
   void _showStatusDialog(String requestId, String currentStatus) {
-    List<String> statuses = ['Accepted', 'Rejected', 'Completed'];
+    final loc = AppLocalizations.of(context)!;
+
+    List<String> statuses = [
+      loc.statusAccepted,
+      loc.statusRejected,
+      loc.statusCompleted,
+    ];
+
     String selectedStatus = currentStatus;
 
     showDialog(
@@ -84,11 +92,11 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text('Update Request Status'),
+              title: Text(AppLocalizations.of(context)!.updateRequestStatus),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Please select the status for this request.'),
+                  Text(AppLocalizations.of(context)!.selectStatus,),
                   SizedBox(height: 16.0),
                   Column(
                     children: List.generate(statuses.length, (index) {
@@ -111,14 +119,14 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Cancel'),
+                  child: Text(AppLocalizations.of(context)!.cancel,),
                 ),
                 TextButton(
                   onPressed: () async {
                     await _updateRequestStatus(requestId, selectedStatus);
                     Navigator.pop(context);
                   },
-                  child: Text('Update Status'),
+                  child: Text(AppLocalizations.of(context)!.updateStatus),
                 ),
               ],
             );

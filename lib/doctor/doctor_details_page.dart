@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../chat_screen.dart';
 import 'model/doctor.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DoctorDetailPage extends StatefulWidget {
   final Doctor doctor;
@@ -29,7 +31,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctor Details'),
+        title: Text(AppLocalizations.of(context)!.doctorDetails),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -151,7 +153,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                     _openMap();
                   },
                   child: Text(
-                    'VIEW LOCATION ON MAP',
+                    AppLocalizations.of(context)!.viewLocationOnMap,
                     style: GoogleFonts.poppins(
                         fontSize: 16,
                         letterSpacing: 0.6,
@@ -161,7 +163,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
               ),
               SizedBox(height: 50),
               Text(
-                'Select Date & Time',
+                AppLocalizations.of(context)!.selectDateTime,
                 style: GoogleFonts.poppins(
                     fontSize: 17, fontWeight: FontWeight.w500),
               ),
@@ -194,7 +196,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                             onPressed: () => _selectDate(context),
                             child: Text(
                               _selectedDate == null
-                                  ? 'Select Date'
+                                  ? AppLocalizations.of(context)!.selectDate
                                   : DateFormat('MM/dd/yyyy')
                                       .format(_selectedDate!),
                               style: GoogleFonts.poppins(
@@ -216,7 +218,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                             onPressed: () => _selectTime(context),
                             child: Text(
                               _selectedTime == null
-                                  ? 'Select Time'
+                                  ? AppLocalizations.of(context)!.selectTime
                                   : _selectedTime!.format(context),
                               style: GoogleFonts.poppins(
                                   fontSize: 15, letterSpacing: 0.6),
@@ -232,7 +234,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                           fontSize: 14, color: Colors.black),
                       maxLines: 3,
                       decoration: InputDecoration(
-                        hintText: 'Description',
+                        hintText: AppLocalizations.of(context)!.description,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -261,7 +263,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
                     _bookAppointment();
                   },
                   child: Text(
-                    'BOOK APPOINTMENT',
+                    AppLocalizations.of(context)!.bookAppointment,
                     style: GoogleFonts.poppins(fontSize: 16, letterSpacing: 2),
                   ),
                 ),

@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:practice/chat_screen.dart';
 import 'package:practice/doctor/model/patient.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DoctorChatlistPage extends StatefulWidget {
   const DoctorChatlistPage({super.key});
@@ -64,10 +65,10 @@ class _DoctorChatlistPageState extends State<DoctorChatlistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Chat with'),),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.chatWith),),
       body: _isLoading ? Center(child: CircularProgressIndicator())
           : _chatList.isEmpty
-          ? Center(child: Text('No chats available'))
+          ? Center(child: Text(AppLocalizations.of(context)!.noChats))
           : ListView.builder(
           itemCount: _chatList.length,
           itemBuilder: (context, index){

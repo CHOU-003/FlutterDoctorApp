@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:practice/chat_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../doctor/model/doctor.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -68,10 +68,10 @@ class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Chat with'),),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.chatWith,),),
       body: _isLoading ? Center(child: CircularProgressIndicator())
           : _chatList.isEmpty
-      ? Center(child: Text('No chats available'))
+      ? Center(child: Text(AppLocalizations.of(context)!.noChats))
       : ListView.builder(
         itemCount: _chatList.length,
           itemBuilder: (context, index){

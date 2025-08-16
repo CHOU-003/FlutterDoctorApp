@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:practice/auth/login_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({super.key});
@@ -57,7 +59,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 if (index >= 0 && index < sortedKeys.length) {
                   return Text(sortedKeys[index].substring(3)); // chỉ lấy MM/dd
                 }
-                return Text('');
+                return Text(AppLocalizations.of(context)!.doctorProfile);
               },
               reservedSize: 28,
             ),
@@ -81,7 +83,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doc Profile'),
+        title: Text(AppLocalizations.of(context)!.doctorDetails),
         actions: [
           IconButton(
             onPressed: _logout,
@@ -97,14 +99,14 @@ class _DoctorProfileState extends State<DoctorProfile> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No request data available'));
+            return Center(child: Text(AppLocalizations.of(context)!.noRequestData));
           } else {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
                   Text(
-                    'Biểu đồ số yêu cầu theo ngày trong tháng',
+                    AppLocalizations.of(context)!.chartRequestsByDay,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 16),

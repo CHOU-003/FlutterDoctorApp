@@ -5,6 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:practice/auth/signup_screen.dart';
 import 'package:practice/doctor/doctor_home_page.dart';
 import 'package:practice/patient/patient_home_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:practice/provider/language_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
@@ -43,60 +46,89 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 48,),
+                          SizedBox(
+                            height: 48,
+                          ),
                           Image.asset('assets/images/plus.png'),
-                          SizedBox(height: 10,),
-                          Text('Welcome!', style: GoogleFonts.poppins(fontSize: 32, fontWeight: FontWeight.w600),),
-                          Text('Login first', style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.w400),),
-                          SizedBox(height: 60,),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.welcome,
+                            style: GoogleFonts.poppins(
+                                fontSize: 32, fontWeight: FontWeight.w600),
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.loginFirst,
+                            style: GoogleFonts.poppins(
+                                fontSize: 24, fontWeight: FontWeight.w400),
+                          ),
+                          SizedBox(
+                            height: 60,
+                          ),
                           SizedBox(
                             height: 44,
                             child: TextFormField(
-                              style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 13, fontWeight: FontWeight.w500),
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Color(0xffF0EFFF),
-                                contentPadding: EdgeInsets.only(left: 10, right: 10),
-                                labelText: 'Email',
-                                labelStyle: GoogleFonts.poppins(fontSize: 13, color: Colors.grey.shade400),
+                                contentPadding:
+                                    EdgeInsets.only(left: 10, right: 10),
+                                labelText: AppLocalizations.of(context)!.email,
+                                labelStyle: GoogleFonts.poppins(
+                                    fontSize: 13, color: Colors.grey.shade400),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Rounded corners
                                   borderSide: BorderSide(
-                                    color: Color(0xff0064FA), // Blue border color
+                                    color:
+                                        Color(0xff0064FA), // Blue border color
                                     width: 1.0, // Border width
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(
-                                    color: Color(0xff0064FA), // Blue border color when focused
+                                    color: Color(
+                                        0xff0064FA), // Blue border color when focused
                                     width: 1.0, // Border width
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(
-                                    color: Color(0xff0064FA), // Blue border color when not focused
+                                    color: Color(
+                                        0xff0064FA), // Blue border color when not focused
                                     width: 1.0, // Border width
                                   ),
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
                               onChanged: (val) => email = val,
-                              validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                              validator: (val) => val!.isEmpty
+                                  ? AppLocalizations.of(context)!.enterEmail
+                                  : null,
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           SizedBox(
                             height: 44,
                             child: TextFormField(
-                              style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500),
+                              style: GoogleFonts.poppins(
+                                  fontSize: 13, fontWeight: FontWeight.w500),
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Color(0xffF0EFFF),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                                labelText: 'Password',
-                                labelStyle: GoogleFonts.poppins(fontSize: 13, color: Colors.grey.shade400),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 10),
+                                labelText:
+                                    AppLocalizations.of(context)!.password,
+                                labelStyle: GoogleFonts.poppins(
+                                    fontSize: 13, color: Colors.grey.shade400),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                   borderSide: BorderSide(
@@ -120,7 +152,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                                    _obscureText
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                     color: Colors.grey.shade400,
                                   ),
                                   onPressed: () {
@@ -134,7 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                               keyboardType: TextInputType.text,
                               onChanged: (val) => password = val,
                               validator: (val) => val!.length < 6
-                                  ? 'Password must be at least 6 characters'
+                                  ? AppLocalizations.of(context)!
+                                      .passwordMinLength
                                   : null,
                             ),
                           ),
@@ -146,19 +181,27 @@ class _LoginPageState extends State<LoginPage> {
                             child: ElevatedButton(
                               onPressed: _login,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xff0064FA), // Blue background color
+                                backgroundColor:
+                                    Color(0xff0064FA), // Blue background color
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0), // Rounded corners
+                                  borderRadius: BorderRadius.circular(
+                                      10.0), // Rounded corners
                                 ),
-                                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Optional: Padding inside the button
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical:
+                                        12), // Optional: Padding inside the button
                               ),
                               child: Text(
-                                'Login',
-                                style: GoogleFonts.poppins(fontSize: 17, color: Colors.white, fontWeight: FontWeight.w600, letterSpacing: 0.4), // Text color
+                                AppLocalizations.of(context)!.login,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0.4), // Text color
                               ),
                             ),
                           ),
-
                           SizedBox(
                             height: 20,
                           ),
@@ -169,7 +212,11 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => RegisterPage()));
                               },
-                              child: Text('Don’t have an account? Register', style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w400),),
+                              child: Text(
+                                AppLocalizations.of(context)!.noAccountRegister,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 15, fontWeight: FontWeight.w400),
+                              ),
                             ),
                           ),
                         ],
@@ -178,6 +225,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (_) => _buildLanguagePicker(context),
+            );
+          },
+          child: const Icon(Icons.language),
+        ),
       ),
     );
   }
@@ -195,7 +251,8 @@ class _LoginPageState extends State<LoginPage> {
         User? user = userCredential.user;
 
         if (user != null) {
-          DatabaseReference userRef = _database.child('Doctors').child(user.uid);
+          DatabaseReference userRef =
+              _database.child('Doctors').child(user.uid);
           DataSnapshot snapshot = await userRef.get();
 
           if (snapshot.exists) {
@@ -225,14 +282,14 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Error'),
+          title: Text(AppLocalizations.of(context)!.error),
           content: Text(message),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: Text(AppLocalizations.of(context)!.ok),
             ),
           ],
         );
@@ -241,19 +298,60 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _navigateToDoctorHome() {
-    if(!_isNavigation){
+    if (!_isNavigation) {
       _isNavigation = true;
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => DoctorHomePage()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => DoctorHomePage()));
     }
   }
 
   void _navigateToPatientHome() {
-    if(!_isNavigation){
+    if (!_isNavigation) {
       _isNavigation = true;
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => PatientHomePage()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => PatientHomePage()));
     }
   }
 
+  Widget _buildLanguagePicker(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(AppLocalizations.of(context)!.chooseLanguage,
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("English"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('en'));
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("Tiếng Việt"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('vi'));
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("日本語"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('ja'));
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }

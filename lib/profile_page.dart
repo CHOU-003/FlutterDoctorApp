@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:practice/auth/login_page.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'doctor/model/booking.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,7 +14,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final DatabaseReference _requestDatabase = FirebaseDatabase.instance.ref().child('Requests');
+  final DatabaseReference _requestDatabase =
+      FirebaseDatabase.instance.ref().child('Requests');
   List<Booking> _bookings = [];
   bool _isLoading = true;
 
@@ -64,13 +65,13 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text(AppLocalizations.of(context)!.profile),
         actions: [IconButton(onPressed: _logout, icon: Icon(Icons.logout))],
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _bookings.isEmpty
-              ? Center(child: Text('No booking available'))
+              ? Center(child: Text(AppLocalizations.of(context)!.noBooking))
               : ListView.builder(
                   itemCount: _bookings.length,
                   itemBuilder: (context, index) {

@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
-
+import 'package:practice/provider/language_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../doctor/doctor_home_page.dart';
 import '../patient/patient_home_page.dart';
 
@@ -49,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Register',
+          AppLocalizations.of(context)!.register,
           style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
@@ -95,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Select User Type',
+                              AppLocalizations.of(context)!.selectUserType,
                               style: GoogleFonts.poppins(
                                   fontSize: 14, color: Colors.grey),
                             ),
@@ -151,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.only(left: 10, right: 10),
-                            labelText: 'Email',
+                            labelText: AppLocalizations.of(context)!.email,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -181,8 +183,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           keyboardType: TextInputType.emailAddress,
                           onChanged: (val) => email = val,
-                          validator: (val) =>
-                              val!.isEmpty ? 'Enter an email' : null,
+                          validator: (val) => val!.isEmpty
+                              ? AppLocalizations.of(context)!.enterEmail
+                              : null,
                         ),
                       ),
                       SizedBox(
@@ -198,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
-                            labelText: 'Password',
+                            labelText: AppLocalizations.of(context)!.password,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -240,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           keyboardType: TextInputType.text,
                           onChanged: (val) => password = val,
                           validator: (val) => val!.length < 6
-                              ? 'Password must be at least 6 characters'
+                              ? AppLocalizations.of(context)!.passwordMinLength
                               : null,
                         ),
                       ),
@@ -257,7 +260,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
-                            labelText: 'Phone Number',
+                            labelText:
+                                AppLocalizations.of(context)!.phoneNumber,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -285,7 +289,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           keyboardType: TextInputType.phone,
                           onChanged: (val) => phoneNumber = val,
                           validator: (val) => val!.isEmpty
-                              ? 'Please enter a phone number'
+                              ? AppLocalizations.of(context)!.enterPhoneNumber
                               : null,
                         ),
                       ),
@@ -302,7 +306,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
-                            labelText: 'First Name',
+                            labelText: AppLocalizations.of(context)!.firstName,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -329,8 +333,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           keyboardType: TextInputType.text,
                           onChanged: (val) => firstName = val,
-                          validator: (val) =>
-                              val!.isEmpty ? 'Please enter a first name' : null,
+                          validator: (val) => val!.isEmpty
+                              ? AppLocalizations.of(context)!.enterFirstName
+                              : null,
                         ),
                       ),
                       SizedBox(
@@ -346,7 +351,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
-                            labelText: 'Last Name',
+                            labelText: AppLocalizations.of(context)!.lastName,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -373,8 +378,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           keyboardType: TextInputType.text,
                           onChanged: (val) => lastName = val,
-                          validator: (val) =>
-                              val!.isEmpty ? 'Please enter a last name' : null,
+                          validator: (val) => val!.isEmpty
+                              ? AppLocalizations.of(context)!.enterLastName
+                              : null,
                         ),
                       ),
                       SizedBox(
@@ -409,7 +415,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Color(0xffF0EFFF),
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 10),
-                            labelText: 'City',
+                            labelText: AppLocalizations.of(context)!.city,
                             labelStyle: GoogleFonts.poppins(
                                 fontSize: 13, color: Colors.grey.shade400),
                             border: OutlineInputBorder(
@@ -434,8 +440,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           ),
-                          validator: (val) =>
-                              val == null ? 'Select a city' : null,
+                          validator: (val) => val == null
+                              ? AppLocalizations.of(context)!.selectCity
+                              : null,
                         ),
                       ),
                       SizedBox(
@@ -452,7 +459,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               fillColor: Color(0xffF0EFFF),
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
-                              labelText: 'Qualification',
+                              labelText:
+                                  AppLocalizations.of(context)!.qualification,
                               labelStyle: GoogleFonts.poppins(
                                   fontSize: 13, color: Colors.grey.shade400),
                               border: OutlineInputBorder(
@@ -479,7 +487,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             onChanged: (val) => qualification = val,
                             validator: (val) => val!.isEmpty
-                                ? 'Please enter a qualification'
+                                ? AppLocalizations.of(context)!
+                                    .enterQualification
                                 : null,
                           ),
                         ),
@@ -516,7 +525,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               fillColor: Color(0xffF0EFFF),
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
-                              labelText: 'Category',
+                              labelText: AppLocalizations.of(context)!.category,
                               labelStyle: GoogleFonts.poppins(
                                   fontSize: 13, color: Colors.grey.shade400),
                               border: OutlineInputBorder(
@@ -541,8 +550,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                             ),
-                            validator: (val) =>
-                                val == null ? 'Select a category' : null,
+                            validator: (val) => val == null
+                                ? AppLocalizations.of(context)!.selectCategory
+                                : null,
                           ),
                         ),
                         SizedBox(
@@ -558,7 +568,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               fillColor: Color(0xffF0EFFF),
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
-                              labelText: 'Year of Experience',
+                              labelText:
+                                  AppLocalizations.of(context)!.yearExperience,
                               labelStyle: GoogleFonts.poppins(
                                   fontSize: 13, color: Colors.grey.shade400),
                               border: OutlineInputBorder(
@@ -586,7 +597,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             keyboardType: TextInputType.number,
                             onChanged: (val) => yearsOfExperience = val,
                             validator: (val) => val!.isEmpty
-                                ? 'Please enter year of experience'
+                                ? AppLocalizations.of(context)!
+                                    .enterYearExperience
                                 : null,
                           ),
                         ),
@@ -609,7 +621,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 vertical: 14), // Vertical padding
                           ),
                           child: Text(
-                            'Click to Get Current Location',
+                            AppLocalizations.of(context)!.clickToGetLocation,
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -638,7 +650,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 vertical: 14), // Vertical padding
                           ),
                           child: Text(
-                            'Register',
+                            AppLocalizations.of(context)!.register,
                             style: GoogleFonts.poppins(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -652,6 +664,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (_) => _buildLanguagePicker(context),
+          );
+        },
+        child: const Icon(Icons.language),
+      ),
     );
   }
 
@@ -756,6 +777,48 @@ class _RegisterPageState extends State<RegisterPage> {
           ],
         );
       },
+    );
+  }
+
+  Widget _buildLanguagePicker(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(AppLocalizations.of(context)!.chooseLanguage,
+              style:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("English"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('en'));
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("Tiếng Việt"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('vi'));
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("日本語"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('ja'));
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
     );
   }
 }
