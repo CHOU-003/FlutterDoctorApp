@@ -5,6 +5,7 @@ class L10n {
     const Locale('en'), // English
     const Locale('vi'), // Tiếng Việt
     const Locale('ja'), // 日本語 (tiếng Nhật)
+    const Locale('zh'), // 中文 (简体中文)
   ];
 
   static String getCountry(String code) {
@@ -15,6 +16,8 @@ class L10n {
         return 'Việt Nam';
       case 'ja':
         return '日本語 (Japanese)';
+      case 'zh':
+        return '中文 (Chinese)';
       default:
         return 'Unknown';
     }

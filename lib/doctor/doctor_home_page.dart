@@ -59,6 +59,7 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
       child: Scaffold(
         body: _children.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           backgroundColor: Color(0xff0064FA),
           unselectedItemColor: Color(0xffBEBEBE),
           items: <BottomNavigationBarItem>[

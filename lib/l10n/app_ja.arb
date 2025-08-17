@@ -70,5 +70,7 @@
   "enterFirstName": "名を入力してください",
   "firstName": "名",
   "enterPhoneNumber": "電話番号を入力してください",
-  "phoneNumber": "電話番号"
+  "phoneNumber": "電話番号",
+  "searchDoctor": "医者を探す",
+  "noResultsFound": "結果が見つかりません"
 }

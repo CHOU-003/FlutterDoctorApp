@@ -88,5 +88,7 @@
   "enterFirstName": "Please enter a first name",
   "firstName": "First Name",
   "enterPhoneNumber": "Please enter a phone number",
-  "phoneNumber": "Phone Number"
+  "phoneNumber": "Phone Number",
+  "searchDoctor": "search for a doctor",
+  "noResultsFound": "No results found"
 }

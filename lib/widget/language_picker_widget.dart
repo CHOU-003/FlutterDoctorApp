@@ -46,7 +46,7 @@ class LanguagePickerWidget extends StatelessWidget {
             }).toList(),
             onChanged: (locale) {
               if (locale != null) {
-                provider.setLocale(locale); // 🔥 đổi ngôn ngữ ngay
+                provider.setLocale(locale);
               }
             },
           ),
@@ -63,7 +63,7 @@ class LanguagePickerWidget extends StatelessWidget {
         return '🇫🇷';
       case 'ja':
         return '🇯🇵';
-      case 'ch':
+      case 'zh':
         return '🇨🇳';
       case 'vi':
         return '🇻🇳';

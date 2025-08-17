@@ -5,6 +5,9 @@ import 'package:practice/doctor/doctor_details_page.dart';
 import 'package:practice/doctor/model/doctor.dart';
 import 'package:practice/doctor/widget/doctor_card.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:practice/patient/all_doctor.dart';
+import 'package:practice/patient/medical_room.dart';
+import 'package:practice/widget/category_card.dart';
 
 class DoctorListPage extends StatefulWidget {
   const DoctorListPage({super.key});
@@ -21,7 +24,6 @@ class _DoctorListPageState extends State<DoctorListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchDoctors();
   }
@@ -84,10 +86,14 @@ class _DoctorListPageState extends State<DoctorListPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildCategoryCard(
-                          context, AppLocalizations.of(context)!.cardiologist, 'assets/images/heart.png'),
-                      _buildCategoryCard(
-                          context, AppLocalizations.of(context)!.dentist, 'assets/images/dental.png'),
+                      CategoryCard(
+                        title: AppLocalizations.of(context)!.cardiologist,
+                        icon: 'assets/images/heart.png',
+                      ),
+                      CategoryCard(
+                        title: AppLocalizations.of(context)!.dentist,
+                        icon: 'assets/images/dental.png',
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -96,11 +102,25 @@ class _DoctorListPageState extends State<DoctorListPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildCategoryCard(
-                          context, AppLocalizations.of(context)!.ophthalmologist, 'assets/images/onco.png'),
-                      _buildCategoryCard(
-                          context, AppLocalizations.of(context)!.seeAll, 'assets/images/grid.png',
-                          isHighlighed: true),
+                      CategoryCard(
+                        title: AppLocalizations.of(context)!.ophthalmologist,
+                        icon: 'assets/images/onco.png',
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MedicalRoom(),
+                            ),
+                          );
+                        },
+                        child: CategoryCard(
+                          title: AppLocalizations.of(context)!.seeAll,
+                          icon: 'assets/images/grid.png',
+                          isHighlighted: true,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -117,12 +137,21 @@ class _DoctorListPageState extends State<DoctorListPage> {
                           color: Colors.grey.shade600,
                         ),
                       ),
-                      Text(
-                        AppLocalizations.of(context)!.viewAll,
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff006AFA),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AllDoctor()),
+                          );
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!.viewAll,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff006AFA),
+                          ),
                         ),
                       ),
                     ],
@@ -150,54 +179,4 @@ class _DoctorListPageState extends State<DoctorListPage> {
             ),
     );
   }
-}
-
-Widget _buildCategoryCard(BuildContext context, String title, dynamic icon,
-    {bool isHighlighed = false}) {
-  return Container(
-    width: MediaQuery.of(context).size.width * 0.4,
-    decoration: BoxDecoration(
-        color: isHighlighed ? Color(0xff006AFA) : Color(0xffF0EFFF),
-        borderRadius: BorderRadius.circular(15),
-        border: isHighlighed
-            ? null
-            : Border.all(color: Color(0xffC8C4FF), width: 2)),
-    child: Card(
-      color: isHighlighed ? Color(0xff006AFA) : Color(0xffF0EFFF),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon is IconData)
-              Icon(
-                icon,
-                size: 40,
-                color: isHighlighed ? Colors.white : Color(0xffF0EFFF),
-              )
-            else
-              Image.asset(
-                icon,
-                width: 40,
-                height: 40,
-              ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              title,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                color: isHighlighed ? Colors.white : Color(0xff006AFA),
-              ),
-            )
-          ],
-        ),
-      ),
-    ),
-  );
 }

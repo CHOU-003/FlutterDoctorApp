@@ -6,7 +6,6 @@ import 'package:practice/profile_page.dart';
 import 'package:practice/setting_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PatientHomePage extends StatefulWidget {
   const PatientHomePage({super.key});
 
@@ -59,14 +58,16 @@ class _PatientHomePageState extends State<PatientHomePage> {
       child: Scaffold(
         body: _children.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color(0xff0064FA),
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color.fromARGB(255, 34, 64, 212),
           unselectedItemColor: Color(0xffBEBEBE),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home_filled,
-                ),
-                label: AppLocalizations.of(context)!.home,),
+              icon: Icon(
+                Icons.home_filled,
+              ),
+              label: AppLocalizations.of(context)!.home,
+            ),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.chat,

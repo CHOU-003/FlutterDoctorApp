@@ -350,6 +350,15 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: const Text("中文"),
+            onTap: () {
+              Provider.of<LanguageProvider>(context, listen: false)
+                  .setLocale(const Locale('zh'));
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );

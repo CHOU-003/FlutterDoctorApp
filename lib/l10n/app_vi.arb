@@ -50,7 +50,7 @@
   "selectTime": "Chọn giờ",
   "description": "Mô tả",
   "bookAppointment": "Đặt lịch hẹn",
-  "doctorRequests": "Yêu cầu từ bác sĩ",
+  "doctorRequests": "Yêu cầu từ bệnh nhân",
   "doctorDetails": "Thông tin bác sĩ",
   "statusAccepted": "Đã chấp nhận",
   "statusRejected": "Đã từ chối",
@@ -88,5 +88,7 @@
   "enterFirstName": "Vui lòng nhập tên",
   "firstName": "Tên",
   "enterPhoneNumber": "Vui lòng nhập số điện thoại",
-  "phoneNumber": "Số điện thoại"
+  "phoneNumber": "Số điện thoại",
+  "searchDoctor": "Tìm bác sĩ",
+  "noResultsFound": "Không tìm thấy kết quả"
 }
