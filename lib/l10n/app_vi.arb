@@ -11,7 +11,7 @@
   "@noChats": {
     "description": "Thông báo khi không có cuộc trò chuyện"
   },
-  "find": "Tìm bác sĩ của bạn",
+  "find": "Một chạm - Ngàn an tâm",
   "@find": {
     "description": "Lời chào ngắn trong chương trình"
   },
@@ -90,5 +90,6 @@
   "enterPhoneNumber": "Vui lòng nhập số điện thoại",
   "phoneNumber": "Số điện thoại",
   "searchDoctor": "Tìm bác sĩ",
-  "noResultsFound": "Không tìm thấy kết quả"
+  "noResultsFound": "Không tìm thấy kết quả",
+  "welcomeProfile": "Chào mừng đến với hồ sơ của bạn"
 }

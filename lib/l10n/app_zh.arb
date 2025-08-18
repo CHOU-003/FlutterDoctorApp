@@ -11,7 +11,7 @@
   "@noChats": {
     "description": "当没有会话时的提示信息"
   },
-  "find": "寻找医生",
+  "find": "一键操作 - 无限安心",
   "@find": {
     "description": "主页上的简短问候"
   },
@@ -89,5 +89,6 @@
   "enterPhoneNumber": "请输入电话号码",
   "phoneNumber": "电话号码",
   "searchDoctor": "搜索医生",
-  "noResultsFound": "未找到结果"
+  "noResultsFound": "未找到结果",
+  "welcomeProfile": "欢迎来到您的个人资料"
 }

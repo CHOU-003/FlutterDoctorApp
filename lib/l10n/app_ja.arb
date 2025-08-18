@@ -2,7 +2,7 @@
   "language": "日本語",
   "chatWith": "チャット",
   "noChats": "まだ会話はありません",
-  "find": "医師を探す",
+  "find": "ワンタップで無限の安心",
   "findExtended": "医師を探して、予約を取る",
   "findByCategory": "専門科目から医師を探す",
   "topDoctors": "トップドクター",
@@ -72,5 +72,6 @@
   "enterPhoneNumber": "電話番号を入力してください",
   "phoneNumber": "電話番号",
   "searchDoctor": "医者を探す",
-  "noResultsFound": "結果が見つかりません"
+  "noResultsFound": "結果が見つかりません",
+  "welcomeProfile": "プロフィールへようこそ"
 }

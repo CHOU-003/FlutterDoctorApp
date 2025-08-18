@@ -1,9 +1,10 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCard extends StatelessWidget {
   final String title;
-  final dynamic icon; 
+  final dynamic icon;
   final bool isHighlighted;
 
   const CategoryCard({
@@ -16,46 +17,70 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.width * 0.42,
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isHighlighted ? const Color(0xff006AFA) : const Color(0xffF0EFFF),
-        borderRadius: BorderRadius.circular(15),
-        border: isHighlighted
-            ? null
-            : Border.all(color: const Color(0xffC8C4FF), width: 2),
-      ),
-      child: Card(
-        color: isHighlighted ? const Color(0xff006AFA) : const Color(0xffF0EFFF),
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon is IconData)
-                Icon(
-                  icon,
-                  size: 40,
-                  color: isHighlighted ? Colors.white : const Color(0xffF0EFFF),
-                )
-              else
-                Image.asset(
-                  icon,
-                  width: 40,
-                  height: 40,
-                ),
-              const SizedBox(height: 16),
-              Text(
-                title,
-                style: GoogleFonts.poppins(
-                  fontSize: 15,
-                  color: isHighlighted ? Colors.white : const Color(0xff006AFA),
-                ),
+        borderRadius: BorderRadius.circular(24),
+        gradient: isHighlighted
+            ? const LinearGradient(
+                colors: [Color(0xff006AFA), Color(0xff00D4FF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               )
-            ],
+            : const LinearGradient(
+                colors: [Colors.white, Color(0xffF5F7FA)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          )
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Icon nổi tròn
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isHighlighted
+                        ? Colors.white.withOpacity(0.2)
+                        : Colors.blue.withOpacity(0.1),
+                  ),
+                  child: icon is IconData
+                      ? Icon(
+                          icon,
+                          size: 36,
+                          color: isHighlighted
+                              ? Colors.white
+                              : const Color(0xff006AFA),
+                        )
+                      : Image.asset(icon, width: 36, height: 36),
+                ),
+                const SizedBox(height: 18),
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color:
+                        isHighlighted ? Colors.white : const Color(0xff006AFA),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),

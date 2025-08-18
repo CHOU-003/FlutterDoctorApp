@@ -11,7 +11,7 @@
   "@noChats": {
     "description": "Message when there are no conversations"
   },
-  "find": "Find your doctor",
+  "find": "One Tap – Endless Peace of Mind",
   "@find": {
     "description": "Short greeting on home screen"
   },
@@ -90,5 +90,6 @@
   "enterPhoneNumber": "Please enter a phone number",
   "phoneNumber": "Phone Number",
   "searchDoctor": "search for a doctor",
-  "noResultsFound": "No results found"
+  "noResultsFound": "No results found",
+  "welcomeProfile": "Welcome to your profile"
 }

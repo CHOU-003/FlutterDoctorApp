@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'model/booking.dart';
 
-
 class DoctorRequestsPage extends StatefulWidget {
   const DoctorRequestsPage({super.key});
 
@@ -21,7 +20,6 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _fetchBookings();
   }
@@ -49,33 +47,117 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
     }
   }
 
+  Color _getStatusColor(String status) {
+    switch (status.toLowerCase()) {
+      case "accepted":
+        return Colors.green.shade600;
+      case "rejected":
+        return Colors.red.shade600;
+      case "completed":
+        return Colors.purple.shade600;
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final loc = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.doctorRequests),
+        title: Text(
+          loc.doctorRequests,
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF6A11CB), Color(0xFF2575FC)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        elevation: 4,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 12),
+                  Text("Đang tải dữ liệu...", style: TextStyle(fontSize: 16)),
+                ],
+              ),
+            )
           : _bookings.isEmpty
-              ? Center(child: Text(AppLocalizations.of(context)!.noBooking,))
+              ? Center(
+                  child: Text(
+                    loc.noBooking,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500),
+                  ),
+                )
               : ListView.builder(
+                  padding: const EdgeInsets.all(12),
                   itemCount: _bookings.length,
                   itemBuilder: (context, index) {
                     final booking = _bookings[index];
-                    return ListTile(
-                      title: Text(booking.description),
-                      subtitle:
-                          Text('Date: ${booking.date} Time: ${booking.time}'),
-                      trailing: Text(booking.status),
-                      onTap: () =>
-                          _showStatusDialog(booking.id, booking.status),
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      elevation: 5,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blue.shade100,
+                          radius: 28,
+                          child: const Icon(Icons.calendar_month,
+                              size: 28, color: Colors.blue),
+                        ),
+                        title: Text(
+                          booking.description,
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Padding(
+                          padding: const EdgeInsets.only(top: 6.0),
+                          child: Text(
+                            "📅 ${booking.date}   ⏰ ${booking.time}",
+                            style: TextStyle(
+                                fontSize: 14, color: Colors.grey.shade700),
+                          ),
+                        ),
+                        trailing: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: _getStatusColor(booking.status)
+                                .withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            booking.status,
+                            style: TextStyle(
+                              color: _getStatusColor(booking.status),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        onTap: () =>
+                            _showStatusBottomSheet(booking.id, booking.status),
+                      ),
                     );
                   }),
     );
   }
 
-  void _showStatusDialog(String requestId, String currentStatus) {
+  void _showStatusBottomSheet(String requestId, String currentStatus) {
     final loc = AppLocalizations.of(context)!;
 
     List<String> statuses = [
@@ -86,52 +168,76 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
 
     String selectedStatus = currentStatus;
 
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.updateRequestStatus),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(AppLocalizations.of(context)!.selectStatus,),
-                  SizedBox(height: 16.0),
-                  Column(
-                    children: List.generate(statuses.length, (index) {
-                      return RadioListTile<String>(
-                        title: Text(statuses[index]),
-                        value: statuses[index],
-                        groupValue: selectedStatus,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedStatus = value!;
-                          });
-                        },
-                      );
-                    }),
+        return StatefulBuilder(builder: (context, setState) {
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Wrap(
+              children: [
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 5,
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(10)),
                   ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(AppLocalizations.of(context)!.cancel,),
                 ),
-                TextButton(
+                Text(
+                  loc.updateRequestStatus,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text(loc.selectStatus),
+                const SizedBox(height: 16),
+                Column(
+                  children: List.generate(statuses.length, (index) {
+                    return RadioListTile<String>(
+                      activeColor: Colors.blue,
+                      title: Text(statuses[index]),
+                      value: statuses[index],
+                      groupValue: selectedStatus,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedStatus = value!;
+                        });
+                      },
+                    );
+                  }),
+                ),
+                const SizedBox(height: 12),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    backgroundColor: Colors.blueAccent,
+                  ),
                   onPressed: () async {
                     await _updateRequestStatus(requestId, selectedStatus);
                     Navigator.pop(context);
                   },
-                  child: Text(AppLocalizations.of(context)!.updateStatus),
+                  icon: const Icon(Icons.check_circle_outline),
+                  label: Text(loc.updateStatus,
+                      style: const TextStyle(fontSize: 16)),
                 ),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(loc.cancel,
+                      style: const TextStyle(color: Colors.red)),
+                )
               ],
-            );
-          },
-        );
+            ),
+          );
+        });
       },
     );
   }
