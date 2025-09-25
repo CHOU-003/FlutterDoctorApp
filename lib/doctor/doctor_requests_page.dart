@@ -128,7 +128,7 @@ class _DoctorRequestsPageState extends State<DoctorRequestsPage> {
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 6.0),
                           child: Text(
-                            "📅 ${booking.date}   ⏰ ${booking.time}",
+                            "${booking.date}   ${booking.time}",
                             style: TextStyle(
                                 fontSize: 14, color: Colors.grey.shade700),
                           ),

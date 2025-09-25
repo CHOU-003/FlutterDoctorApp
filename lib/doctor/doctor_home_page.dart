@@ -18,10 +18,10 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _children = [
-    DoctorRequestsPage(),
-    DoctorChatlistPage(),
-    DoctorProfile(),
-    SettingsPage(),
+    const DoctorRequestsPage(),
+    const DoctorChatlistPage(),
+    const DoctorProfile(),
+    const SettingsPage(),
   ];
 
   void _onItmTapped(int index) {
@@ -54,32 +54,33 @@ class _DoctorHomePageState extends State<DoctorHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: _onWilPop,
       child: Scaffold(
         body: _children.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xff0064FA),
-          unselectedItemColor: Color(0xffBEBEBE),
+          backgroundColor: const Color(0xff0064FA),
+          unselectedItemColor: const Color(0xffBEBEBE),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.home_filled,
                 ),
                 label: AppLocalizations.of(context)!.home),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.chat,
                 ),
                 label: AppLocalizations.of(context)!.chat),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person,
                 ),
                 label: AppLocalizations.of(context)!.profile),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings,
                 ),
                 label: AppLocalizations.of(context)!.settings),

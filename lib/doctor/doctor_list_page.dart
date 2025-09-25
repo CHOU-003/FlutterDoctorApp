@@ -50,15 +50,15 @@ class _DoctorListPageState extends State<DoctorListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30.0,
                   ),
                   Text(
@@ -69,7 +69,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Text(
@@ -80,7 +80,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                       color: Colors.grey.shade600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16.0,
                   ),
                   Row(
@@ -96,7 +96,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Row(
@@ -123,7 +123,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Row(
@@ -150,7 +150,7 @@ class _DoctorListPageState extends State<DoctorListPage> {
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff006AFA),
+                            color: const Color(0xff006AFA),
                           ),
                         ),
                       ),

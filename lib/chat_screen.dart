@@ -46,7 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
       String chatId = _chatDatabase.push().key!;
       String timeStamp = DateTime.now().toIso8601String();
 
-      //determine sender and receiver IDs based on the user's role
+      // khởi tạo id cho ng nhận và ng gửi
       String senderUid;
       String receiverUid;
 
@@ -58,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
         receiverUid = widget.doctorId!;
       }
 
-      // save message in Chat database
+      // lưu đoạn chat vào db
       _chatDatabase.child(chatId).set({
         'message': message,
         'receiver': receiverUid,
@@ -66,16 +66,17 @@ class _ChatScreenState extends State<ChatScreen> {
         'timestamp': timeStamp,
       });
 
-      //update chatList
+      //cập nhật chatlIst bên người nhận
       _chatListDatabase.child(senderUid).child(receiverUid).set({
         'id': receiverUid,
       });
 
+      //cập nhật chatlist bên người gửi
       _chatListDatabase.child(receiverUid).child(senderUid).set({
         'id': senderUid,
       });
 
-      //clear the message input
+      // clear đoạn chát trong form nhập
       _messageController.clear();
     }
   }
@@ -103,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                       if (!snapshot.hasData ||
                           snapshot.data?.snapshot.value == null) {
-                        return Center(child: Text('No message yet.'));
+                        return const Center(child: Text('No message yet.'));
                       }
                       Map<dynamic, dynamic> messagesMap = snapshot
                           .data!.snapshot.value as Map<dynamic, dynamic>;
@@ -138,21 +139,21 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
                               child: Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 16),
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     vertical: 4, horizontal: 8),
                                 decoration: BoxDecoration(
                                   color: isMe
-                                      ? Color(0xffC8C4FF)
-                                      : Color(0xffE3E3E3),
+                                      ? const Color(0xffC8C4FF)
+                                      : const Color(0xffE3E3E3),
                                   borderRadius: isMe
-                                      ? BorderRadius.only(
+                                      ? const BorderRadius.only(
                                           topLeft: Radius.circular(10),
                                           topRight: Radius.circular(10),
                                           bottomLeft: Radius.circular(10),
                                           bottomRight: Radius.zero)
-                                      : BorderRadius.only(
+                                      : const BorderRadius.only(
                                           topLeft: Radius.circular(10),
                                           topRight: Radius.circular(10),
                                           bottomLeft: Radius.zero,
@@ -164,7 +165,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           });
                     })),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Row(
                 children: [
                   Expanded(
@@ -183,13 +184,13 @@ class _ChatScreenState extends State<ChatScreen> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 borderSide:
-                                    BorderSide(color: Color(0xffC8C4FF)))),
+                                    const BorderSide(color: Color(0xffC8C4FF)))),
                       ),
                     ),
                   ),
                   IconButton(
                       onPressed: _sendMessage,
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.send,
                         size: 30,
                         color: Color(0xff0064FA),

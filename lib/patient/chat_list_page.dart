@@ -58,7 +58,7 @@ class _ChatListPageState extends State<ChatListPage> {
           _isLoading = false;
         });
       } catch (error) {
-        // handle error
+        
       }
     }
   }

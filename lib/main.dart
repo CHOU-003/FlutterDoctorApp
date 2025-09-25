@@ -24,8 +24,7 @@ void main() async {
           measurementId: "G-98FXZP7J8P"),
     );
   } else {
-    await Firebase
-        .initializeApp(); // Android, iOS dùng file google-services.json / GoogleService-Info.plist
+    await Firebase.initializeApp();
   }
 
   runApp(
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       supportedLocales: L10n.all,
-      locale: languageProvider.locale, 
+      locale: languageProvider.locale,
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -54,5 +53,4 @@ class MyApp extends StatelessWidget {
       ],
     );
   }
-
 }

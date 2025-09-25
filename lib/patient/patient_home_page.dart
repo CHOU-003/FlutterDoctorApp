@@ -63,23 +63,23 @@ class _PatientHomePageState extends State<PatientHomePage> {
           unselectedItemColor: Color(0xffBEBEBE),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home_filled,
               ),
               label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.chat,
                 ),
                 label: AppLocalizations.of(context)!.chat),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.person,
                 ),
                 label: AppLocalizations.of(context)!.profile),
             BottomNavigationBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.settings,
                 ),
                 label: AppLocalizations.of(context)!.settings),

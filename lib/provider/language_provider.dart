@@ -7,13 +7,14 @@ class LanguageProvider extends ChangeNotifier {
   Locale get locale => _locale;
 
   void setLocale(Locale locale) {
-    if (!L10n.all.contains(locale)) return; // chỉ cho phép ngôn ngữ trong danh sách
+    // set ngon ngu cho tât ca
+    if (!L10n.all.contains(locale)) return; 
     _locale = locale;
     notifyListeners();
   }
 
   void clearLocale() {
-    _locale = const Locale('en'); // quay về mặc định
+    _locale = const Locale('en'); 
     notifyListeners();
   }
 }
