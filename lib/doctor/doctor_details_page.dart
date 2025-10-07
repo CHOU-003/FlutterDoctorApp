@@ -324,7 +324,7 @@ class _DoctorDetailPageState extends State<DoctorDetailPage> {
     }
   }
 
-  // appointment
+  // Đặt lịch khám
 
   void _bookAppointment() {
     if (_selectedDate != null &&

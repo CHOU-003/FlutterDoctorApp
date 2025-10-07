@@ -48,6 +48,7 @@ class _AllDoctorState extends State<AllDoctor> {
   void _filterDoctors(String query) {
     final results = _doctors.where((doctor) {
       return doctor.lastName.toLowerCase().contains(query.toLowerCase()) ||
+          doctor.firstName.toLowerCase().contains(query.toLowerCase()) ||
           doctor.city.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
